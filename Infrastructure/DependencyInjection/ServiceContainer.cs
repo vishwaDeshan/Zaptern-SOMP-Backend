@@ -1,5 +1,6 @@
 ﻿using Application;
 using Application.Common.Interfaces;
+using Application.Post.Queries;
 using Infrastructure.Data;
 using Infrastructure.Repository;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -46,6 +47,10 @@ namespace Infrastructure.DependencyInjection
 				};
 			});
 			services.AddScoped<IUser, UserRepository>();
+			services.AddScoped<IApplicationDbContext>(provider => (IApplicationDbContext)provider.GetService<AppDbContext>());
+			services.AddHttpContextAccessor();
+
+			services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(typeof(GetPostRequestHandler).Assembly));
 
 			return services;
 		}
