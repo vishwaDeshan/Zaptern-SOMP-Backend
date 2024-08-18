@@ -1,5 +1,5 @@
 ﻿using Application;
-using Application.Contracts;
+using Application.Common.Interfaces;
 using Infrastructure.Data;
 using Infrastructure.Repository;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -11,7 +11,7 @@ using System.Text;
 
 namespace Infrastructure.DependencyInjection
 {
-	public static class ServiceContainer
+    public static class ServiceContainer
 	{
 		public static IServiceCollection AddInfrastructureServices(this IServiceCollection services, IConfiguration configuration)
 		{

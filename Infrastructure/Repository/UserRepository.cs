@@ -1,4 +1,4 @@
-﻿using Application.Contracts;
+﻿using Application.Common.Interfaces;
 using Application.UserAccount.DTOs;
 using Domain.Entities;
 using Infrastructure.Data;
