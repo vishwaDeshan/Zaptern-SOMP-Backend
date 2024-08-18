@@ -1,4 +1,5 @@
-﻿using Application.Contracts;
+﻿using Application;
+using Application.Contracts;
 using Infrastructure.Data;
 using Infrastructure.Repository;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -14,12 +15,19 @@ namespace Infrastructure.DependencyInjection
 	{
 		public static IServiceCollection AddInfrastructureServices(this IServiceCollection services, IConfiguration configuration)
 		{
+
+			// add database context services
 			services.AddDbContext<AppDbContext>(options =>
 				options.UseSqlServer(
 					configuration.GetConnectionString("Default"),
 					b => b.MigrationsAssembly(typeof(AppDbContext).Assembly.FullName)
 				), ServiceLifetime.Scoped);
 
+
+			// add layer dependency
+			services.AddApplicationServices();
+
+			// add authentication services
 			services.AddAuthentication(options =>
 			{
 				options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -38,6 +46,7 @@ namespace Infrastructure.DependencyInjection
 				};
 			});
 			services.AddScoped<IUser, UserRepository>();
+
 			return services;
 		}
 	}

@@ -1,5 +1,5 @@
 ﻿using Application.Contracts;
-using Application.DTOs;
+using Application.UserAccount.DTOs;
 using Domain.Entities;
 using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
@@ -11,7 +11,7 @@ using System.Text;
 
 namespace Infrastructure.Repository
 {
-	internal class UserRepository : IUser
+    internal class UserRepository : IUser
 	{
 		private readonly AppDbContext _context;
 		private readonly IConfiguration configuration;
