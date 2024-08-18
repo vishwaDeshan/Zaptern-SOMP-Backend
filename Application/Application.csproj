@@ -14,8 +14,8 @@
     <Folder Include="Common\Behaviours\" />
     <Folder Include="Common\Exceptions\" />
     <Folder Include="Common\Mappings\" />
-    <Folder Include="UserAccount\UserAccountCommand\" />
-    <Folder Include="UserAccount\UserAccountQuery\" />
+    <Folder Include="UserAccount\Commands\" />
+    <Folder Include="UserAccount\Queries\" />
   </ItemGroup>
 
   <ItemGroup>

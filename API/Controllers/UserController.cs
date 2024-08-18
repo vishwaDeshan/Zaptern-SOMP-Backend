@@ -1,5 +1,6 @@
 ﻿using Application.Common.Interfaces;
 using Application.UserAccount.DTOs;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -7,6 +8,7 @@ namespace API.Controllers
 {
     [Route("api/[controller]")]
 	[ApiController]
+	[AllowAnonymous]
 	public class User : ControllerBase
 	{
 		private readonly IUser user;
