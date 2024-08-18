@@ -15,8 +15,6 @@
     <Folder Include="Common\Exceptions\" />
     <Folder Include="Common\Mappings\" />
     <Folder Include="Post\Commands\" />
-    <Folder Include="UserAccount\Commands\" />
-    <Folder Include="UserAccount\Queries\" />
   </ItemGroup>
 
   <ItemGroup>
