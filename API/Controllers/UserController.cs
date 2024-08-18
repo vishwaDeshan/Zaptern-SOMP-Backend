@@ -1,4 +1,4 @@
-﻿using Application.Contracts;
+﻿using Application.Common.Interfaces;
 using Application.UserAccount.DTOs;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
