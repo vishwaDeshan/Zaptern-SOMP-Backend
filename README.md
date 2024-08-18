@@ -1,7 +1,7 @@
 # Zaptern-Student-Opportunity-Management-Portal-Backend
 
 # Clean Architecture
-Clean Architecture is a software design pattern focused on creating a modular and maintainable codebase by clearly separating concerns and managing dependencies. It achieves this by organizing code into multiple layers, each with distinct responsibilities, and enforcing strict boundaries between them. Below, I’ll outline the key principles of Clean Architecture and provide an example of a .NET 7 code structure that adheres to these principles.
+Clean Architecture is a software design pattern focused on creating a modular and maintainable codebase by clearly separating concerns and managing dependencies. It achieves this by organizing code into multiple layers, each with distinct responsibilities, and enforcing strict boundaries between them. Below, I’ll outline the key principles of Clean Architecture and provide an example of a .NET 8 code structure that adheres to these principles.
 
 # Key Principles of Clean Architecture:
 Separation of Concerns: The codebase is divided into distinct layers, each responsible for specific aspects of the application.
