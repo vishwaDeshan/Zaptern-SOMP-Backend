@@ -1,7 +1,9 @@
 ﻿using Application;
 using Application.Common.Interfaces;
+using Application.Post.Queries;
 using Infrastructure.Data;
 using Infrastructure.Repository;
+using Infrastructure.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -46,6 +48,11 @@ namespace Infrastructure.DependencyInjection
 				};
 			});
 			services.AddScoped<IUser, UserRepository>();
+			services.AddScoped<IJwtTokenGenerator, JwtTokenGenerator>();
+			services.AddScoped<IApplicationDbContext>(provider => (IApplicationDbContext)provider.GetService<AppDbContext>());
+			services.AddHttpContextAccessor();
+
+			services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(typeof(GetPostRequestHandler).Assembly));
 
 			return services;
 		}
