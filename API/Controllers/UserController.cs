@@ -1,11 +1,11 @@
 ﻿using Application.Contracts;
-using Application.DTOs;
+using Application.UserAccount.DTOs;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
 {
-	[Route("api/[controller]")]
+    [Route("api/[controller]")]
 	[ApiController]
 	public class User : ControllerBase
 	{

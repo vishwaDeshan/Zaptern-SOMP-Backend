@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.DTOs
+namespace Application.UserAccount.DTOs
 {
-	public record LoginResponse(bool Flag, string Message=null!, string Token = null!);
+    public record RegistrationResponse(bool Flag, string Message = null!);
 }

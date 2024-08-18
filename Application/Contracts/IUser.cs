@@ -1,8 +1,8 @@
-﻿using Application.DTOs;
+﻿using Application.UserAccount.DTOs;
 
 namespace Application.Contracts
 {
-	public interface IUser
+    public interface IUser
 	{
 		Task<RegistrationResponse> RegisterUserAsync(RegisterUserDTO registerUserDTO);
 		Task<LoginResponse> LoginUserAsync(LoginUserDTO loginUserDTO);
