@@ -11,7 +11,29 @@ namespace Infrastructure.Data
 		}
 
 		public DbSet<ApplicationUser> Users { get; set; }
-
+		public DbSet<Student> Students { get; set; }
+		public DbSet<Administrator> Administrators { get; set; }
+		public DbSet<Instructor> Instructors { get; set; }
 		public DbSet<PostContent> Posts { get; set; }
+
+		protected override void OnModelCreating(ModelBuilder modelBuilder)
+		{
+			base.OnModelCreating(modelBuilder);
+
+			modelBuilder.Entity<ApplicationUser>()
+				.HasOne(u => u.Student)
+				.WithOne(s => s.ApplicationUser)
+				.HasForeignKey<Student>(s => s.UserID);
+
+			modelBuilder.Entity<ApplicationUser>()
+				.HasOne(u => u.Administrator)
+				.WithOne(a => a.ApplicationUser)
+				.HasForeignKey<Administrator>(a => a.UserID);
+
+			modelBuilder.Entity<ApplicationUser>()
+				.HasOne(u => u.Instructor)
+				.WithOne(i => i.ApplicationUser)
+				.HasForeignKey<Instructor>(i => i.UserID);
+		}
 	}
 }

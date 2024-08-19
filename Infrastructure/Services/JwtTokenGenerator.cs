@@ -26,7 +26,7 @@ namespace Infrastructure.Services
 			var userClaims = new[]
 			{
 				new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
-				new Claim(ClaimTypes.Name, user.Name!),
+				new Claim(ClaimTypes.Name, user.FirstName!),
 				new Claim(ClaimTypes.Email, user.Email!)
 			};
 
