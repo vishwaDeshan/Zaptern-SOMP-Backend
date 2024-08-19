@@ -12,5 +12,11 @@ namespace Application.Common.Interfaces
 		DbSet<PostContent> Posts { get; set; }
 		DbSet<Feedback> Feedbacks { get; set; }
 		DbSet<Course> Courses { get; set; }
+		DbSet<Notification> Notifications { get; set; }
+		DbSet<Internship> Internships { get; set; }
+		DbSet<Scholarship> Scholarships { get; set; }
+		DbSet<ApplicationForm> ApplicationForms { get; set; }
+
+
 	}
 }

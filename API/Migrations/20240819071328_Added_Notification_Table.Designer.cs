@@ -4,6 +4,7 @@ using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace API.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240819071328_Added_Notification_Table")]
+    partial class Added_Notification_Table
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -60,64 +63,6 @@ namespace API.Migrations
                         .IsUnique();
 
                     b.ToTable("Administrators");
-                });
-
-            modelBuilder.Entity("Domain.Entities.ApplicationForm", b =>
-                {
-                    b.Property<Guid>("ApplicationID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTimeOffset?>("Created")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<string>("CreatedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<Guid>("Id")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid?>("InternshipID")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTimeOffset?>("LastModified")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<string>("LastModifiedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("ReviewedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid?>("ReviewedByAdminID")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid?>("ScholarshipID")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<int>("Status")
-                        .HasColumnType("int");
-
-                    b.Property<Guid>("StudentID")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("SubmissionDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("Type")
-                        .HasColumnType("int");
-
-                    b.HasKey("ApplicationID");
-
-                    b.HasIndex("InternshipID");
-
-                    b.HasIndex("ReviewedByAdminID");
-
-                    b.HasIndex("ScholarshipID");
-
-                    b.HasIndex("StudentID");
-
-                    b.ToTable("ApplicationForms");
                 });
 
             modelBuilder.Entity("Domain.Entities.ApplicationUser", b =>
@@ -248,9 +193,6 @@ namespace API.Migrations
                     b.Property<Guid>("StudentID")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("StudentID1")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<DateTime>("SubmittedAt")
                         .HasColumnType("datetime2");
 
@@ -259,8 +201,6 @@ namespace API.Migrations
                     b.HasIndex("CourseID");
 
                     b.HasIndex("StudentID");
-
-                    b.HasIndex("StudentID1");
 
                     b.ToTable("Feedbacks");
                 });
@@ -288,63 +228,6 @@ namespace API.Migrations
                         .IsUnique();
 
                     b.ToTable("Instructors");
-                });
-
-            modelBuilder.Entity("Domain.Entities.Internship", b =>
-                {
-                    b.Property<Guid>("InternshipID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("CompanyName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTimeOffset?>("Created")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<string>("CreatedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("EligibilityCriteria")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("EndDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid>("Id")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTimeOffset?>("LastModified")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<string>("LastModifiedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Location")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<Guid>("PostedByAdminID")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("StartDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("InternshipID");
-
-                    b.HasIndex("PostedByAdminID");
-
-                    b.ToTable("Internships");
                 });
 
             modelBuilder.Entity("Domain.Entities.Notification", b =>
@@ -426,55 +309,6 @@ namespace API.Migrations
                     b.ToTable("Posts");
                 });
 
-            modelBuilder.Entity("Domain.Entities.Scholarship", b =>
-                {
-                    b.Property<Guid>("ScholarshipID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<decimal>("Amount")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<DateTime>("ApplicationDeadline")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTimeOffset?>("Created")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<string>("CreatedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("EligibilityCriteria")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<Guid>("Id")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTimeOffset?>("LastModified")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<string>("LastModifiedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<Guid>("PostedByAdminID")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("ScholarshipID");
-
-                    b.HasIndex("PostedByAdminID");
-
-                    b.ToTable("Scholarships");
-                });
-
             modelBuilder.Entity("Domain.Entities.Student", b =>
                 {
                     b.Property<Guid>("StudentID")
@@ -532,39 +366,10 @@ namespace API.Migrations
                     b.Navigation("ApplicationUser");
                 });
 
-            modelBuilder.Entity("Domain.Entities.ApplicationForm", b =>
-                {
-                    b.HasOne("Domain.Entities.Internship", "Internship")
-                        .WithMany("ApplicationForms")
-                        .HasForeignKey("InternshipID");
-
-                    b.HasOne("Domain.Entities.Administrator", "ReviewedByAdmin")
-                        .WithMany()
-                        .HasForeignKey("ReviewedByAdminID");
-
-                    b.HasOne("Domain.Entities.Scholarship", "Scholarship")
-                        .WithMany("ApplicationForms")
-                        .HasForeignKey("ScholarshipID");
-
-                    b.HasOne("Domain.Entities.Student", "Student")
-                        .WithMany("ApplicationForms")
-                        .HasForeignKey("StudentID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Internship");
-
-                    b.Navigation("ReviewedByAdmin");
-
-                    b.Navigation("Scholarship");
-
-                    b.Navigation("Student");
-                });
-
             modelBuilder.Entity("Domain.Entities.Course", b =>
                 {
                     b.HasOne("Domain.Entities.Instructor", "Instructor")
-                        .WithMany("Courses")
+                        .WithMany()
                         .HasForeignKey("InstructorID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -586,10 +391,6 @@ namespace API.Migrations
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("Domain.Entities.Student", null)
-                        .WithMany("Feedbacks")
-                        .HasForeignKey("StudentID1");
-
                     b.Navigation("Course");
 
                     b.Navigation("Student");
@@ -606,17 +407,6 @@ namespace API.Migrations
                     b.Navigation("ApplicationUser");
                 });
 
-            modelBuilder.Entity("Domain.Entities.Internship", b =>
-                {
-                    b.HasOne("Domain.Entities.Administrator", "PostedByAdmin")
-                        .WithMany("Internships")
-                        .HasForeignKey("PostedByAdminID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("PostedByAdmin");
-                });
-
             modelBuilder.Entity("Domain.Entities.Notification", b =>
                 {
                     b.HasOne("Domain.Entities.ApplicationUser", "ApplicationUser")
@@ -628,17 +418,6 @@ namespace API.Migrations
                     b.Navigation("ApplicationUser");
                 });
 
-            modelBuilder.Entity("Domain.Entities.Scholarship", b =>
-                {
-                    b.HasOne("Domain.Entities.Administrator", "PostedByAdmin")
-                        .WithMany("Scholarships")
-                        .HasForeignKey("PostedByAdminID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("PostedByAdmin");
-                });
-
             modelBuilder.Entity("Domain.Entities.Student", b =>
                 {
                     b.HasOne("Domain.Entities.ApplicationUser", "ApplicationUser")
@@ -648,13 +427,6 @@ namespace API.Migrations
                         .IsRequired();
 
                     b.Navigation("ApplicationUser");
-                });
-
-            modelBuilder.Entity("Domain.Entities.Administrator", b =>
-                {
-                    b.Navigation("Internships");
-
-                    b.Navigation("Scholarships");
                 });
 
             modelBuilder.Entity("Domain.Entities.ApplicationUser", b =>
@@ -671,28 +443,6 @@ namespace API.Migrations
 
             modelBuilder.Entity("Domain.Entities.Course", b =>
                 {
-                    b.Navigation("Feedbacks");
-                });
-
-            modelBuilder.Entity("Domain.Entities.Instructor", b =>
-                {
-                    b.Navigation("Courses");
-                });
-
-            modelBuilder.Entity("Domain.Entities.Internship", b =>
-                {
-                    b.Navigation("ApplicationForms");
-                });
-
-            modelBuilder.Entity("Domain.Entities.Scholarship", b =>
-                {
-                    b.Navigation("ApplicationForms");
-                });
-
-            modelBuilder.Entity("Domain.Entities.Student", b =>
-                {
-                    b.Navigation("ApplicationForms");
-
                     b.Navigation("Feedbacks");
                 });
 #pragma warning restore 612, 618
