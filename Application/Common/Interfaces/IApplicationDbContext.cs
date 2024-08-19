@@ -10,5 +10,7 @@ namespace Application.Common.Interfaces
 		DbSet<Administrator> Administrators { get; set; }
 		DbSet<Instructor> Instructors { get; set; }
 		DbSet<PostContent> Posts { get; set; }
+		DbSet<Feedback> Feedbacks { get; set; }
+		DbSet<Course> Courses { get; set; }
 	}
 }
