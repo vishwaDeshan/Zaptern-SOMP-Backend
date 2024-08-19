@@ -4,6 +4,7 @@ using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace API.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240819072034_Added_Internship_Scholarship_Application_tables")]
+    partial class Added_Internship_Scholarship_Application_tables
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -248,9 +251,6 @@ namespace API.Migrations
                     b.Property<Guid>("StudentID")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("StudentID1")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<DateTime>("SubmittedAt")
                         .HasColumnType("datetime2");
 
@@ -259,8 +259,6 @@ namespace API.Migrations
                     b.HasIndex("CourseID");
 
                     b.HasIndex("StudentID");
-
-                    b.HasIndex("StudentID1");
 
                     b.ToTable("Feedbacks");
                 });
@@ -547,7 +545,7 @@ namespace API.Migrations
                         .HasForeignKey("ScholarshipID");
 
                     b.HasOne("Domain.Entities.Student", "Student")
-                        .WithMany("ApplicationForms")
+                        .WithMany()
                         .HasForeignKey("StudentID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -564,7 +562,7 @@ namespace API.Migrations
             modelBuilder.Entity("Domain.Entities.Course", b =>
                 {
                     b.HasOne("Domain.Entities.Instructor", "Instructor")
-                        .WithMany("Courses")
+                        .WithMany()
                         .HasForeignKey("InstructorID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -586,10 +584,6 @@ namespace API.Migrations
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("Domain.Entities.Student", null)
-                        .WithMany("Feedbacks")
-                        .HasForeignKey("StudentID1");
-
                     b.Navigation("Course");
 
                     b.Navigation("Student");
@@ -609,7 +603,7 @@ namespace API.Migrations
             modelBuilder.Entity("Domain.Entities.Internship", b =>
                 {
                     b.HasOne("Domain.Entities.Administrator", "PostedByAdmin")
-                        .WithMany("Internships")
+                        .WithMany()
                         .HasForeignKey("PostedByAdminID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -631,7 +625,7 @@ namespace API.Migrations
             modelBuilder.Entity("Domain.Entities.Scholarship", b =>
                 {
                     b.HasOne("Domain.Entities.Administrator", "PostedByAdmin")
-                        .WithMany("Scholarships")
+                        .WithMany()
                         .HasForeignKey("PostedByAdminID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -648,13 +642,6 @@ namespace API.Migrations
                         .IsRequired();
 
                     b.Navigation("ApplicationUser");
-                });
-
-            modelBuilder.Entity("Domain.Entities.Administrator", b =>
-                {
-                    b.Navigation("Internships");
-
-                    b.Navigation("Scholarships");
                 });
 
             modelBuilder.Entity("Domain.Entities.ApplicationUser", b =>
@@ -674,11 +661,6 @@ namespace API.Migrations
                     b.Navigation("Feedbacks");
                 });
 
-            modelBuilder.Entity("Domain.Entities.Instructor", b =>
-                {
-                    b.Navigation("Courses");
-                });
-
             modelBuilder.Entity("Domain.Entities.Internship", b =>
                 {
                     b.Navigation("ApplicationForms");
@@ -687,13 +669,6 @@ namespace API.Migrations
             modelBuilder.Entity("Domain.Entities.Scholarship", b =>
                 {
                     b.Navigation("ApplicationForms");
-                });
-
-            modelBuilder.Entity("Domain.Entities.Student", b =>
-                {
-                    b.Navigation("ApplicationForms");
-
-                    b.Navigation("Feedbacks");
                 });
 #pragma warning restore 612, 618
         }

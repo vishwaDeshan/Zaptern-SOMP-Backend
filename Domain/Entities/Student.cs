@@ -22,5 +22,8 @@ namespace Domain.Entities
 		[ForeignKey("UserID")]
 		public Guid UserID { get; set; }
 		public ApplicationUser ApplicationUser { get; set; }
+
+		public ICollection<ApplicationForm> ApplicationForms { get; set; }
+		public ICollection<Feedback> Feedbacks { get; set; }
 	}
 }
