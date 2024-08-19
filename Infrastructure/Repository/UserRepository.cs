@@ -53,7 +53,8 @@ namespace Infrastructure.Repository
 
 			_context.Users.Add(new ApplicationUser()
 			{
-				Name = registerUserDTO.Name,
+				FirstName = registerUserDTO.FirstName,
+				LastName = registerUserDTO.LastName,
 				Email = registerUserDTO.Email,
 				Password = BCrypt.Net.BCrypt.HashPassword(registerUserDTO.Password)
 			});
