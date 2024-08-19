@@ -4,7 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.DTOs
+namespace Domain.Common
 {
-	public record RegistrationResponse(bool Flag, string Message=null!);
+	public abstract class BaseEntity
+	{
+		public Guid Id { get; set; }
+	}
 }

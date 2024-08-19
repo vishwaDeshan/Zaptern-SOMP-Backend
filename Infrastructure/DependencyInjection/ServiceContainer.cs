@@ -1,6 +1,9 @@
-﻿using Application.Contracts;
+﻿using Application;
+using Application.Common.Interfaces;
+using Application.Post.Queries;
 using Infrastructure.Data;
 using Infrastructure.Repository;
+using Infrastructure.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -10,16 +13,24 @@ using System.Text;
 
 namespace Infrastructure.DependencyInjection
 {
-	public static class ServiceContainer
+    public static class ServiceContainer
 	{
 		public static IServiceCollection AddInfrastructureServices(this IServiceCollection services, IConfiguration configuration)
 		{
+
+			// add database context services
 			services.AddDbContext<AppDbContext>(options =>
 				options.UseSqlServer(
 					configuration.GetConnectionString("Default"),
-					b => b.MigrationsAssembly(typeof(AppDbContext).Assembly.FullName)
+					//b => b.MigrationsAssembly(typeof(AppDbContext).Assembly.FullName)
+					b => b.MigrationsAssembly("API")
 				), ServiceLifetime.Scoped);
 
+
+			// add layer dependency
+			services.AddApplicationServices();
+
+			// add authentication services
 			services.AddAuthentication(options =>
 			{
 				options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -38,6 +49,12 @@ namespace Infrastructure.DependencyInjection
 				};
 			});
 			services.AddScoped<IUser, UserRepository>();
+			services.AddScoped<IJwtTokenGenerator, JwtTokenGenerator>();
+			services.AddScoped<IApplicationDbContext>(provider => (IApplicationDbContext)provider.GetService<AppDbContext>());
+			services.AddHttpContextAccessor();
+
+			services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(typeof(GetPostRequestHandler).Assembly));
+
 			return services;
 		}
 	}
