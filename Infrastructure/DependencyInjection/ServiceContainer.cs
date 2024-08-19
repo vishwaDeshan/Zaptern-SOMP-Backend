@@ -22,7 +22,8 @@ namespace Infrastructure.DependencyInjection
 			services.AddDbContext<AppDbContext>(options =>
 				options.UseSqlServer(
 					configuration.GetConnectionString("Default"),
-					b => b.MigrationsAssembly(typeof(AppDbContext).Assembly.FullName)
+					//b => b.MigrationsAssembly(typeof(AppDbContext).Assembly.FullName)
+					b => b.MigrationsAssembly("API")
 				), ServiceLifetime.Scoped);
 
 
