@@ -17,6 +17,7 @@ namespace Infrastructure.Data
 		public DbSet<PostContent> Posts { get; set; }
 		public DbSet<Feedback> Feedbacks { get; set; }
 		public DbSet<Course> Courses { get; set; }
+		public DbSet<Notification> Notifications { get; set; }
 
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
