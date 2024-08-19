@@ -15,6 +15,8 @@ namespace Infrastructure.Data
 		public DbSet<Administrator> Administrators { get; set; }
 		public DbSet<Instructor> Instructors { get; set; }
 		public DbSet<PostContent> Posts { get; set; }
+		public DbSet<Feedback> Feedbacks { get; set; }
+		public DbSet<Course> Courses { get; set; }
 
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
@@ -34,6 +36,18 @@ namespace Infrastructure.Data
 				.HasOne(u => u.Instructor)
 				.WithOne(i => i.ApplicationUser)
 				.HasForeignKey<Instructor>(i => i.UserID);
+
+			modelBuilder.Entity<Feedback>()
+				.HasOne(f => f.Student)
+				.WithMany()
+				.HasForeignKey(f => f.StudentID)
+				.OnDelete(DeleteBehavior.NoAction);
+
+			modelBuilder.Entity<Feedback>()
+				.HasOne(f => f.Course)
+				.WithMany(c => c.Feedbacks)
+				.HasForeignKey(f => f.CourseID)
+				.OnDelete(DeleteBehavior.Cascade);
 		}
 	}
 }
