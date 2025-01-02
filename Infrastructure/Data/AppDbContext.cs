@@ -13,5 +13,7 @@ namespace Infrastructure.Data
 		public DbSet<ApplicationUser> Users { get; set; }
 
 		public DbSet<PostContent> Posts { get; set; }
+
+		public DbSet<Applicant> Applicants {  get; set; }
 	}
 }
