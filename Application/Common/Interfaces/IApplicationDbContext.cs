@@ -8,5 +8,9 @@ namespace Application.Common.Interfaces
 		DbSet<ApplicationUser> Users { get; set; }
 
 		DbSet<PostContent> Posts { get; set; }
+
+		DbSet<Applicant> Applicants { get; set; }
+
+		Task<int> SaveChangesAsync(CancellationToken cancellationToken);
 	}
 }
