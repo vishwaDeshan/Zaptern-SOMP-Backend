@@ -1,7 +1,5 @@
 ﻿using Application.Applicants.Mappers;
 using Application.Common.Interfaces;
-using AutoMapper;
-using Domain.Entities;
 using MediatR;
 
 namespace Application.Applicants.Commands

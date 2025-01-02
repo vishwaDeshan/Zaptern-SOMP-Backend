@@ -1,4 +1,5 @@
 ﻿using Application.Applicants.Commands;
+using Application.Utilities;
 using Domain.Entities;
 
 namespace Application.Applicants.Mappers
@@ -9,6 +10,7 @@ namespace Application.Applicants.Mappers
 		{
 			return new Applicant
 			{
+				ApplicantId = new GuidGenerator().GenerateUniqueId(),
 				NationalId = command.NationalId,
 				HomeAddress = command.HomeAddress,
 				HomeCity = command.HomeCity,
@@ -28,6 +30,8 @@ namespace Application.Applicants.Mappers
 				LandLine = applicant.LandLine
 			};
 		}
+
+
 	}
 
 }
