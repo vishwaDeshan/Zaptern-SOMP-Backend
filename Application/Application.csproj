@@ -7,14 +7,19 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Post\Commands\**" />
+    <EmbeddedResource Remove="Post\Commands\**" />
+    <None Remove="Post\Commands\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Domain\Domain.csproj" />
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Applicants\Commands\" />
     <Folder Include="Common\Behaviours\" />
-    <Folder Include="Common\Exceptions\" />
     <Folder Include="Common\Mappings\" />
-    <Folder Include="Post\Commands\" />
   </ItemGroup>
 
   <ItemGroup>
