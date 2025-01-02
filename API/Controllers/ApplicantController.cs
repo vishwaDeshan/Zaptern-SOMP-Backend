@@ -1,6 +1,8 @@
 ﻿using API.Controllers;
 using Application.Applicants;
+using Application.Applicants.Commands;
 using Application.Applicants.Queries;
+using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -16,6 +18,21 @@ namespace API.Controllers
 		public async Task<List<ApplicantDto>> Get([FromQuery] GetAllApplicantRequestQuery query)
 		{
 			return await this.Mediator.Send(query);
+		}
+
+		[HttpPost("applicant")]
+		public async Task<ActionResult<ApplicantDto>> Post(PostApplicantRequestCommand command)
+		{
+			try
+			{
+				var result = await Mediator.Send(command);
+				return CreatedAtAction(nameof(Post), new { id = result.ApplicantId }, result);
+			}
+			catch (Exception ex)
+			{
+				// Handle exceptions
+				return BadRequest(new { error = ex.Message });
+			}
 		}
 	}
 }

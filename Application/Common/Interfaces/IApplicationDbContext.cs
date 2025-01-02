@@ -11,5 +11,6 @@ namespace Application.Common.Interfaces
 
 		DbSet<Applicant> Applicants { get; set; }
 
+		Task<int> SaveChangesAsync(CancellationToken cancellationToken);
 	}
 }

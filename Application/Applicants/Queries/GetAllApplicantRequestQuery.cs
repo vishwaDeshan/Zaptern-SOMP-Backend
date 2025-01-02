@@ -32,7 +32,7 @@ namespace Application.Applicants.Queries
 
 				if (!applicants.Any())
 				{
-					throw new NotFoundException("Applicant");
+					throw new NotFoundException("Applicants");
 				}
 
 				return applicants;

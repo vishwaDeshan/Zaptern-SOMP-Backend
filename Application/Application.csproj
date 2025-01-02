@@ -17,7 +17,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Applicants\Commands\" />
     <Folder Include="Common\Behaviours\" />
     <Folder Include="Common\Mappings\" />
   </ItemGroup>

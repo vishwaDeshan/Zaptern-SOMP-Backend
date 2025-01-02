@@ -15,5 +15,10 @@ namespace Infrastructure.Data
 		public DbSet<PostContent> Posts { get; set; }
 
 		public DbSet<Applicant> Applicants {  get; set; }
+
+		async Task<int> IApplicationDbContext.SaveChangesAsync(CancellationToken cancellationToken)
+		{
+			return await base.SaveChangesAsync(cancellationToken);
+		}
 	}
 }
