@@ -1,7 +1,6 @@
 ﻿using Application.Common.Interfaces;
 using Application.Post;
 using Application.Post.Queries;
-using Application.UserAccount.DTOs;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 

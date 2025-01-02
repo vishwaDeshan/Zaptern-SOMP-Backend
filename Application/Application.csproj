@@ -7,18 +7,19 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Common\Behaviours\**" />
+    <Compile Remove="Common\Mappings\**" />
     <Compile Remove="Post\Commands\**" />
+    <EmbeddedResource Remove="Common\Behaviours\**" />
+    <EmbeddedResource Remove="Common\Mappings\**" />
     <EmbeddedResource Remove="Post\Commands\**" />
+    <None Remove="Common\Behaviours\**" />
+    <None Remove="Common\Mappings\**" />
     <None Remove="Post\Commands\**" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Domain\Domain.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Common\Behaviours\" />
-    <Folder Include="Common\Mappings\" />
   </ItemGroup>
 
   <ItemGroup>
