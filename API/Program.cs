@@ -1,5 +1,4 @@
 using Application.Common.Interfaces;
-using Application.Post.Queries;
 using Infrastructure.Data;
 using Infrastructure.DependencyInjection;
 using Microsoft.OpenApi.Models;
