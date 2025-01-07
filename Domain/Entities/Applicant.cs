@@ -37,5 +37,7 @@ namespace Domain.Entities
 		public string? Hobbies {  get; set; }
 
 		public string? OtherHobbies { get; set; }
+
+		public string?  AnyComments { get; set; }
 	}
 }
