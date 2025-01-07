@@ -12,10 +12,22 @@ namespace Application.Applicants.Mappers
 			{
 				ApplicantId = new GuidGenerator().GenerateUniqueId(),
 				NationalId = command.NationalId,
-				HomeAddress = command.HomeAddress,
-				HomeCity = command.HomeCity,
+				City = command.City,
 				PhoneNumber = command.PhoneNumber,
-				LandLine = command.LandLine
+				LandLine = command.LandLine,
+				Email = command.Email,
+				DateOfBirth = command.DateOfBirth,
+				FirstName = command.FirstName,
+				LastName = command.LastName,
+				MiddleName = command.MiddleName,
+				Nationality = command.Nationality,
+				Pronouns = command.Pronouns,
+				Street = command.Street,
+				ZipCode = command.ZipCode,
+				Hobbies	= command.Hobbies,
+				Gender = command.Gender,
+				AnyComments = command.AnyComments,
+				OtherHobbies = command.OtherHobbies,
 			};
 		}
 
@@ -24,10 +36,22 @@ namespace Application.Applicants.Mappers
 			return new ApplicantDto
 			{
 				NationalId = applicant.NationalId,
-				HomeAddress = applicant.HomeAddress,
-				HomeCity = applicant.HomeCity,
 				PhoneNumber = applicant.PhoneNumber,
-				LandLine = applicant.LandLine
+				LandLine = applicant.LandLine,
+				FirstName= applicant.FirstName,
+				LastName= applicant.LastName,
+				MiddleName = applicant.MiddleName,
+				Pronouns = applicant.Pronouns,
+				AnyComments = applicant.AnyComments,
+				Hobbies = applicant.Hobbies,
+				Nationality = applicant.Nationality,
+				Street = applicant.Street,
+				ZipCode = applicant.ZipCode,
+				City = applicant.City,
+				Email = applicant.Email,
+				DateOfBirth = applicant.DateOfBirth,
+				Gender=applicant.Gender,
+				OtherHobbies = applicant.OtherHobbies,
 			};
 		}
 

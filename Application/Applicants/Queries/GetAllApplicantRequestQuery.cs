@@ -24,10 +24,22 @@ namespace Application.Applicants.Queries
 				{
 					ApplicantId = a.ApplicantId,
 					PhoneNumber = a.PhoneNumber,
-					HomeAddress = a.HomeAddress,
-					HomeCity = a.HomeCity,
 					LandLine = a.LandLine,
-					NationalId = a.NationalId
+					NationalId = a.NationalId,
+					City = a.City,
+					FirstName = a.FirstName,
+					LastName = a.LastName,
+					Email = a.Email,
+					DateOfBirth = a.DateOfBirth,
+					Gender = a.Gender,
+					MiddleName = a.MiddleName,
+					Nationality = a.Nationality,
+					Pronouns = a.Pronouns,
+					Street = a.Street,
+					Hobbies = a.Hobbies,
+					ZipCode	= a.ZipCode,
+					OtherHobbies = a.OtherHobbies,
+					AnyComments = a.AnyComments
 				}).ToListAsync(cancellationToken: cancellationToken);
 
 				if (!applicants.Any())
