@@ -34,14 +34,14 @@ namespace Application.Applicants.Commands
 			_applicationDbContext = applicationDbContext ?? throw new ArgumentNullException(nameof(applicationDbContext));
 		}
 
-		public async Task<ApplicantDto> Handle(PostApplicantRequestCommand command, CancellationToken cancellationToken)
+		public async Task<ApplicantDto> Handle(PostApplicantRequestCommand request, CancellationToken cancellationToken)
 		{
-			if (command == null)
+			if (request == null)
 			{
-				throw new ArgumentNullException(nameof(command), "Command cannot be null.");
+				throw new ArgumentNullException(nameof(request), "Request cannot be null.");
 			}
 
-			var applicant = ApplicantMapper.MapToApplicant(command);
+			var applicant = ApplicantMapper.MapToApplicant(request);
 
 			if (_applicationDbContext == null)
 			{
