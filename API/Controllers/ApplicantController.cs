@@ -26,6 +26,20 @@ namespace API.Controllers
 			return await this.Mediator.Send(query);
 		}
 
+		[HttpPut("updateApplicant")]
+		public async Task<IActionResult> Update(UpdateApplicantRequestCommand command)
+		{
+			try
+			{
+				var result = await Mediator.Send(command);
+				return Ok(result);
+			}
+			catch (Exception ex)
+			{
+				return BadRequest(new { error = ex.Message });
+			}
+		}
+
 		[HttpPost("applicant")]
 		public async Task<ActionResult<ApplicantDto>> Post(PostApplicantRequestCommand command)
 		{
