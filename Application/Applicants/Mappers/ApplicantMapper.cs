@@ -35,6 +35,7 @@ namespace Application.Applicants.Mappers
 		{
 			return new ApplicantDto
 			{
+				ApplicantId = applicant.ApplicantId,
 				NationalId = applicant.NationalId,
 				PhoneNumber = applicant.PhoneNumber,
 				LandLine = applicant.LandLine,

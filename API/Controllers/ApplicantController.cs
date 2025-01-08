@@ -20,6 +20,12 @@ namespace API.Controllers
 			return await this.Mediator.Send(query);
 		}
 
+		[HttpGet("getApplicant")]
+		public async Task<ApplicantDto> Get([FromQuery] GetApplicantByIdRequestQuery query)
+		{
+			return await this.Mediator.Send(query);
+		}
+
 		[HttpPost("applicant")]
 		public async Task<ActionResult<ApplicantDto>> Post(PostApplicantRequestCommand command)
 		{
@@ -30,7 +36,6 @@ namespace API.Controllers
 			}
 			catch (Exception ex)
 			{
-				// Handle exceptions
 				return BadRequest(new { error = ex.Message });
 			}
 		}
