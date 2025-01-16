@@ -1,5 +1,6 @@
 ﻿using Application.Applicants.Mappers;
 using Application.Common.Interfaces;
+using AutoMapper;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -35,10 +36,12 @@ namespace Application.Applicants.Commands
 	public class UpdateApplicantRequestHandler : IRequestHandler<UpdateApplicantRequestCommand, ApplicantDto>
 	{
 		private readonly IApplicationDbContext _applicationDbContext;
+		private readonly IMapper _mapper;
 
-		public UpdateApplicantRequestHandler(IApplicationDbContext applicationDbContext)
+		public UpdateApplicantRequestHandler(IApplicationDbContext applicationDbContext, IMapper mapper)
 		{
 			_applicationDbContext = applicationDbContext;
+			_mapper = mapper;
 		}
 
 		public async Task<ApplicantDto> Handle(UpdateApplicantRequestCommand request, CancellationToken cancellationToken)
@@ -53,30 +56,10 @@ namespace Application.Applicants.Commands
 			if (applicant == null)
 				throw new KeyNotFoundException($"Applicant ID {request.ApplicantId} not found.");
 
-			applicant.NationalId = request.NationalId;
-			applicant.City = request.City;
-			applicant.PhoneNumber = request.PhoneNumber;
-			applicant.LandLine = request.LandLine;
-			applicant.FirstName = request.FirstName;
-			applicant.LastName = request.LastName;
-			applicant.MiddleName = request.MiddleName;
-			applicant.Gender = request.Gender;
-			applicant.Pronouns = request.Pronouns;
-			applicant.DateOfBirth = request.DateOfBirth;
-			applicant.Email = request.Email;
-			applicant.Nationality = request.Nationality;
-			applicant.Street = request.Street;
-			applicant.ZipCode = request.ZipCode;
-			applicant.Hobbies = request.Hobbies;
-			applicant.OtherHobbies = request.OtherHobbies;
-			applicant.AnyComments = request.AnyComments;
-
+			_mapper.Map(request, applicant);
 
 			await _applicationDbContext.SaveChangesAsync(cancellationToken);
-			var updatedApplicantDto = ApplicantMapper.MapToApplicantDto(applicant);
-
-			return updatedApplicantDto;
+			return _mapper.Map<ApplicantDto>(applicant);
 		}
 	}
-
 }
