@@ -1,4 +1,5 @@
 ﻿using Application;
+using Application.Applicants.Mappers;
 using Application.Common.Interfaces;
 using Infrastructure.Data;
 using Infrastructure.Repository;
@@ -48,6 +49,7 @@ namespace Infrastructure.DependencyInjection
 			});
 			services.AddScoped<IUser, UserRepository>();
 			services.AddScoped<IJwtTokenGenerator, JwtTokenGenerator>();
+			services.AddAutoMapper(typeof(ApplicantMappingProfile));
 			services.AddScoped<IApplicationDbContext>(provider => (IApplicationDbContext)provider.GetService<AppDbContext>());
 			services.AddHttpContextAccessor();
 
