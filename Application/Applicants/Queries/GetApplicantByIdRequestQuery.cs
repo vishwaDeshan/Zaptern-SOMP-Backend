@@ -1,7 +1,8 @@
 ﻿using MediatR;
-using Application.Common.Interfaces;
-using Microsoft.EntityFrameworkCore;
+using Dapper;
 using Application.Applicants.Mappers;
+using System.Data;
+using Domain.Entities;
 
 namespace Application.Applicants.Queries
 {
@@ -12,21 +13,22 @@ namespace Application.Applicants.Queries
 
 	public class GetApplicantByIdRequestHandler : IRequestHandler<GetApplicantByIdRequestQuery, ApplicantDto>
 	{
-		private readonly IApplicationDbContext _applicationDbContext;
+		private readonly IDbConnection _dbConnection;
 
-		public GetApplicantByIdRequestHandler(IApplicationDbContext applicationDbContext)
+		public GetApplicantByIdRequestHandler(IDbConnection dbConnection)
 		{
-			_applicationDbContext = applicationDbContext;
+			_dbConnection = dbConnection;
 		}
+
 
 		public async Task<ApplicantDto> Handle(GetApplicantByIdRequestQuery request, CancellationToken cancellationToken)
 		{
 			try
 			{
-				var applicant = await _applicationDbContext.Applicants
-					.Where(a => a.ApplicantId == request.Id)
-					.FirstOrDefaultAsync(cancellationToken);
+				string query = "SELECT * FROM Applicants WHERE ApplicantId = @Id";
 
+				var applicant = await _dbConnection.QueryFirstOrDefaultAsync<Applicant>(
+									query, new { Id = request.Id });
 				if (applicant == null)
 				{
 					throw new Exception($"Applicant with ID {request.Id} not found.");
