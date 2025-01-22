@@ -26,4 +26,9 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.8" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="EducationDetails\Mappers\" />
+    <Folder Include="EducationDetails\Queries\" />
+  </ItemGroup>
+
 </Project>

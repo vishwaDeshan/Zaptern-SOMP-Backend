@@ -14,6 +14,8 @@ namespace Infrastructure.Data
 
 		public DbSet<Applicant> Applicants {  get; set; }
 
+		public DbSet<EducationalDetails> EducationalDetails { get; set; }
+
 		async Task<int> IApplicationDbContext.SaveChangesAsync(CancellationToken cancellationToken)
 		{
 			return await base.SaveChangesAsync(cancellationToken);
