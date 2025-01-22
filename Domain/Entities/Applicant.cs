@@ -39,5 +39,7 @@ namespace Domain.Entities
 		public string? OtherHobbies { get; set; }
 
 		public string?  AnyComments { get; set; }
+
+		public ICollection<EducationalDetails>? EducationalDetails { get; set; }
 	}
 }

@@ -1,6 +1,7 @@
 ﻿using Application;
 using Application.Applicants.Mappers;
 using Application.Common.Interfaces;
+using Application.EducationDetails;
 using Infrastructure.Data;
 using Infrastructure.Repository;
 using Infrastructure.Services;

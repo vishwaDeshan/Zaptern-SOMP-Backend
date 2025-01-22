@@ -55,8 +55,6 @@ namespace Application.Applicants.Mappers
 				OtherHobbies = applicant.OtherHobbies,
 			};
 		}
-
-
 	}
 
 }
