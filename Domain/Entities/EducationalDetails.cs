@@ -12,6 +12,6 @@ namespace Domain.Entities
 
 		public bool? IsDoing { get; set; }
 
-		public string? description { get; set; }
+		public string? Description { get; set; }
 	}
 }
