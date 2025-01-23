@@ -3,6 +3,7 @@ using Domain.Entities;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Application.EducationDetails.Mappers;
+using AutoMapper;
 
 namespace Application.EducationDetails.Commands
 {
@@ -19,10 +20,12 @@ namespace Application.EducationDetails.Commands
 	public class PostEducationalDetailsRequestHandler : IRequestHandler<PostEducationalDetailsRequestCommand, EducationalDetailsDto>
 	{
 		private readonly IApplicationDbContext _applicationDbContext;
+		private readonly IMapper _mapper;
 
-		public PostEducationalDetailsRequestHandler(IApplicationDbContext applicationDbContext)
+		public PostEducationalDetailsRequestHandler(IApplicationDbContext applicationDbContext, IMapper mapper)
 		{
 			_applicationDbContext = applicationDbContext ?? throw new ArgumentNullException(nameof(applicationDbContext));
+			_mapper = mapper;
 		}
 
 		public async Task<EducationalDetailsDto> Handle(PostEducationalDetailsRequestCommand request, CancellationToken cancellationToken)
@@ -41,11 +44,16 @@ namespace Application.EducationDetails.Commands
 				{
 					throw new ArgumentException(nameof(request.ApplicantId), "ApplicantId cannot be found");
 				}
-					var newEducationalRecord = EducationDetailsMapper.MapToEducationalDetails(request, existingApplicant);
-					await _applicationDbContext.EducationalDetails.AddAsync(newEducationalRecord, cancellationToken);
-					await _applicationDbContext.SaveChangesAsync(cancellationToken);
 
-					return EducationDetailsMapper.MapToEducationalDetailsDto(newEducationalRecord);
+				var newEducationalRecord = _mapper.Map<EducationalDetails>(request);
+
+				newEducationalRecord.Applicant = existingApplicant;
+
+				await _applicationDbContext.EducationalDetails.AddAsync(newEducationalRecord, cancellationToken);
+				await _applicationDbContext.SaveChangesAsync(cancellationToken);
+
+				return _mapper.Map<EducationalDetailsDto>(newEducationalRecord);
+
 			}
 			catch (Exception ex)
 			{
