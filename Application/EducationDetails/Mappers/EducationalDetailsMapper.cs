@@ -30,14 +30,5 @@ namespace Application.EducationDetails.Mappers
 				IsDoing = educationalDetails.IsDoing,
 			};
 		}
-
-		public static void MapToExistingRecord(PostEducationalDetailsRequestCommand command, EducationalDetails existingRecord)
-		{
-			existingRecord.InstituteName = command.InstituteName;
-			existingRecord.StartDate = command.StartDate;
-			existingRecord.EndDate = command.EndDate;
-			existingRecord.IsDoing = command.IsDoing;
-			existingRecord.Description = command.Description;
-		}
 	}
 }
