@@ -36,10 +36,7 @@ namespace Application.Applicants.Commands
 
 		public async Task<ApplicantDto> Handle(PostApplicantRequestCommand request, CancellationToken cancellationToken)
 		{
-			if (request == null)
-			{
-				throw new ArgumentNullException(nameof(request), "Request cannot be null.");
-			}
+			ArgumentNullException.ThrowIfNull(request);
 
 			var applicant = ApplicantMapper.MapToApplicant(request);
 

@@ -32,10 +32,7 @@ namespace Application.EducationDetails.Commands
 		{
 			try
 			{
-				if (request.ApplicantId == null)
-				{
-					throw new ArgumentNullException(nameof(request.ApplicantId), "ApplicantId cannot be null");
-				}
+				ArgumentNullException.ThrowIfNull(request);
 
 				var existingApplicant = await _applicationDbContext.Applicants
 				   .FirstOrDefaultAsync(e => e.ApplicantId == request.ApplicantId, cancellationToken);
