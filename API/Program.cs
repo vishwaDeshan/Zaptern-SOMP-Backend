@@ -1,7 +1,10 @@
 using Application.Common.Interfaces;
 using Infrastructure.Data;
 using Infrastructure.DependencyInjection;
+using Microsoft.Data.SqlClient;
+using Microsoft.Extensions.Configuration;
 using Microsoft.OpenApi.Models;
+using System.Data;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -56,6 +59,8 @@ builder.Services.AddSwaggerGen(swagger =>
 });
 
 builder.Services.AddInfrastructureServices(builder.Configuration);
+builder.Services.AddTransient<IDbConnection>(sp =>
+	new SqlConnection(builder.Configuration.GetConnectionString("Default")));
 
 var app = builder.Build();
 

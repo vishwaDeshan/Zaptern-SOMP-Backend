@@ -20,6 +20,8 @@ namespace Application.Applicants.Queries
 		{
 			try
 			{
+				ArgumentNullException.ThrowIfNull(request);
+
 				var applicants = await _applicationDbContext.Applicants.Select(a => new ApplicantDto
 				{
 					ApplicantId = a.ApplicantId,

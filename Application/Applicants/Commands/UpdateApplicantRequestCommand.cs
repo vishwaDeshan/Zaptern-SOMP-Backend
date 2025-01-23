@@ -46,8 +46,7 @@ namespace Application.Applicants.Commands
 
 		public async Task<ApplicantDto> Handle(UpdateApplicantRequestCommand request, CancellationToken cancellationToken)
 		{
-			if (request == null)
-				throw new ArgumentNullException(nameof(request), "Request cannot be null.");
+			ArgumentNullException.ThrowIfNull(request);
 
 			var applicant = await _applicationDbContext.Applicants
 				.Where(a => a.ApplicantId == request.ApplicantId)

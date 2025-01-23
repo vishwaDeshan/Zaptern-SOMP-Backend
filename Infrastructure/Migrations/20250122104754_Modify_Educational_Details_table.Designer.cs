@@ -4,6 +4,7 @@ using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250122104754_Modify_Educational_Details_table")]
+    partial class Modify_Educational_Details_table
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -145,13 +148,10 @@ namespace Infrastructure.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("EducationalDetails", b =>
+            modelBuilder.Entity("Domain.Entities.EducationalDetails", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("ApplicantId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTimeOffset?>("Created")
@@ -184,25 +184,7 @@ namespace Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ApplicantId");
-
                     b.ToTable("EducationalDetails");
-                });
-
-            modelBuilder.Entity("EducationalDetails", b =>
-                {
-                    b.HasOne("Domain.Entities.Applicant", "Applicant")
-                        .WithMany("EducationalDetails")
-                        .HasForeignKey("ApplicantId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Applicant");
-                });
-
-            modelBuilder.Entity("Domain.Entities.Applicant", b =>
-                {
-                    b.Navigation("EducationalDetails");
                 });
 #pragma warning restore 612, 618
         }

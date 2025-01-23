@@ -4,6 +4,7 @@ using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250122140641_Add_Apllicant_Educational_Details_Relation")]
+    partial class Add_Apllicant_Educational_Details_Relation
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -145,7 +148,7 @@ namespace Infrastructure.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("EducationalDetails", b =>
+            modelBuilder.Entity("Domain.Entities.EducationalDetails", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -189,7 +192,7 @@ namespace Infrastructure.Migrations
                     b.ToTable("EducationalDetails");
                 });
 
-            modelBuilder.Entity("EducationalDetails", b =>
+            modelBuilder.Entity("Domain.Entities.EducationalDetails", b =>
                 {
                     b.HasOne("Domain.Entities.Applicant", "Applicant")
                         .WithMany("EducationalDetails")

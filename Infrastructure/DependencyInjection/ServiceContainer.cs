@@ -1,6 +1,7 @@
 ﻿using Application;
 using Application.Applicants.Mappers;
 using Application.Common.Interfaces;
+using Application.EducationDetails;
 using Infrastructure.Data;
 using Infrastructure.Repository;
 using Infrastructure.Services;
@@ -9,6 +10,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
+using System.Reflection;
 using System.Text;
 
 namespace Infrastructure.DependencyInjection
@@ -49,7 +51,9 @@ namespace Infrastructure.DependencyInjection
 			});
 			services.AddScoped<IUser, UserRepository>();
 			services.AddScoped<IJwtTokenGenerator, JwtTokenGenerator>();
-			services.AddAutoMapper(typeof(ApplicantMappingProfile));
+
+			//all automapper mappings
+			services.AddAutoMapper(Assembly.GetExecutingAssembly());
 			services.AddScoped<IApplicationDbContext>(provider => (IApplicationDbContext)provider.GetService<AppDbContext>());
 			services.AddHttpContextAccessor();
 
