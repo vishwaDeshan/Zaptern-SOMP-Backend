@@ -8,19 +8,25 @@ using Application.EducationDetails.Commands;
 
 namespace API.Controllers
 {
-	[Route("api/educationalDetails")]
+	[Route("api")]
 	[ApiController]
 	[AllowAnonymous] // temporarily set anonymous
 	public class EducationalDetailsController : BaseApiController
 	{
 
-		[HttpGet("getEducationalDetails")]
+		[HttpGet("getAllEducationalDetails")]
 		public async Task<List<EducationalDetailsDto>> Get([FromQuery] GetAllEducationalDetailsRequestQuery query)
 		{
 			return await this.Mediator.Send(query);
 		}
 
-		[HttpPost("educationalDetails")]
+		[HttpGet("getEducationalDetailsById")]
+		public async Task<List<EducationalDetailsDto>> Get([FromQuery] GetEducationalDetailsByIdRequestQuery query)
+		{
+			return await this.Mediator.Send(query);
+		}
+
+		[HttpPost("addEducationalDetails")]
 		public async Task<ActionResult<EducationalDetailsDto>> Post(PostEducationalDetailsRequestCommand command)
 		{
 			try
