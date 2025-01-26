@@ -21,6 +21,7 @@ namespace Application.Applicants.Queries
 			try
 			{
 				ArgumentNullException.ThrowIfNull(request);
+				ArgumentNullException.ThrowIfNull(_applicationDbContext, nameof(_applicationDbContext));
 
 				var applicants = await _applicationDbContext.Applicants.Select(a => new ApplicantDto
 				{

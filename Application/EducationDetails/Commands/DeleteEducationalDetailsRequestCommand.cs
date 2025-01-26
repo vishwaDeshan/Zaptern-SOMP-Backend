@@ -1,11 +1,6 @@
 ﻿using Application.Common.Interfaces;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Application.EducationDetails.Commands
 {
@@ -26,6 +21,7 @@ namespace Application.EducationDetails.Commands
 			try
 			{
 				ArgumentNullException.ThrowIfNull(request);
+				ArgumentNullException.ThrowIfNull(_applicationDbContext, nameof(_applicationDbContext));
 
 				var educationalDetail = await _applicationDbContext.EducationalDetails
 					.FirstOrDefaultAsync(r => r.Id == request.Id, cancellationToken);
