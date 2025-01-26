@@ -1,5 +1,4 @@
-﻿using API.Controllers;
-using Application.Applicants;
+﻿using Application.Applicants;
 using Application.Applicants.Commands;
 using Application.Applicants.Queries;
 using MediatR;

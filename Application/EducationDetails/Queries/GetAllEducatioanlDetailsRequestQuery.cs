@@ -20,6 +20,7 @@ namespace Application.EducationDetails.Queries
 			try
 			{
 				ArgumentNullException.ThrowIfNull(request);
+				ArgumentNullException.ThrowIfNull(_applicationDbContext, nameof(_applicationDbContext));
 
 				var result = await _applicationDbContext.EducationalDetails.Select(a => new EducationalDetailsDto
 				{

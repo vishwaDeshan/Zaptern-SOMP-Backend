@@ -40,10 +40,7 @@ namespace Application.Applicants.Commands
 
 			var applicant = ApplicantMapper.MapToApplicant(request);
 
-			if (_applicationDbContext == null)
-			{
-				throw new InvalidOperationException("DbContext is not initialized.");
-			}
+			ArgumentNullException.ThrowIfNull(_applicationDbContext, nameof(_applicationDbContext));
 
 			await _applicationDbContext.Applicants.AddAsync(applicant, cancellationToken);
 			await _applicationDbContext.SaveChangesAsync(cancellationToken);

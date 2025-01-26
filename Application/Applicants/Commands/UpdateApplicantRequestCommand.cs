@@ -1,13 +1,7 @@
-﻿using Application.Applicants.Mappers;
-using Application.Common.Interfaces;
+﻿using Application.Common.Interfaces;
 using AutoMapper;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Application.Applicants.Commands
 {
@@ -47,6 +41,7 @@ namespace Application.Applicants.Commands
 		public async Task<ApplicantDto> Handle(UpdateApplicantRequestCommand request, CancellationToken cancellationToken)
 		{
 			ArgumentNullException.ThrowIfNull(request);
+			ArgumentNullException.ThrowIfNull(_applicationDbContext, nameof(_applicationDbContext));
 
 			var applicant = await _applicationDbContext.Applicants
 				.Where(a => a.ApplicantId == request.ApplicantId)

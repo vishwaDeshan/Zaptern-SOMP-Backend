@@ -1,11 +1,6 @@
 ﻿using Application.Common.Interfaces;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Application.EducationDetails.Queries
 {
@@ -28,6 +23,7 @@ namespace Application.EducationDetails.Queries
 			try
 			{
 				ArgumentNullException.ThrowIfNull(request);
+				ArgumentNullException.ThrowIfNull(_applicationDbContext, nameof(_applicationDbContext));
 
 				var result = await _applicationDbContext.EducationalDetails
 					.Where(e => e.Applicant.ApplicantId == request.ApplicantId)

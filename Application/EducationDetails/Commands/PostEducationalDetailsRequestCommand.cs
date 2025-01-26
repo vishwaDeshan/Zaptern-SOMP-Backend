@@ -1,5 +1,4 @@
 ﻿using Application.Common.Interfaces;
-using Domain.Entities;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Application.EducationDetails.Mappers;
@@ -33,6 +32,7 @@ namespace Application.EducationDetails.Commands
 			try
 			{
 				ArgumentNullException.ThrowIfNull(request);
+				ArgumentNullException.ThrowIfNull(_applicationDbContext, nameof(_applicationDbContext));
 
 				var existingApplicant = await _applicationDbContext.Applicants
 				   .FirstOrDefaultAsync(e => e.ApplicantId == request.ApplicantId, cancellationToken);
