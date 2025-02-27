@@ -11,6 +11,8 @@ namespace Application.Common.Interfaces
 
 		DbSet<EducationalDetails> EducationalDetails { get; set; }
 
+		DbSet<ApplicantHealthRecords> ApplicantHealthRecords { get; set; }
+
 		Task<int> SaveChangesAsync(CancellationToken cancellationToken);
 	}
 }
