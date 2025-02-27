@@ -4,6 +4,7 @@ using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250227082125_Add_Health_Records_Table")]
+    partial class Add_Health_Records_Table
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,71 +24,6 @@ namespace Infrastructure.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
-
-            modelBuilder.Entity("ApplicantHealthRecords", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<bool?>("Accommodations")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("AccommodationsDetails")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool?>("Allergies")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("AllergiesDetails")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<Guid>("ApplicantId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTimeOffset?>("Created")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<string>("CreatedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTimeOffset?>("LastModified")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<string>("LastModifiedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool?>("MedicalConditions")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("MedicalConditionsDetails")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool?>("Medications")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("MedicationsDetails")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool?>("Surgeries")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("SurgeriesDetails")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool?>("Vaccinated")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("VaccinatedDetails")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ApplicantId")
-                        .IsUnique();
-
-                    b.ToTable("ApplicantHealthRecords");
-                });
 
             modelBuilder.Entity("Domain.Entities.Applicant", b =>
                 {
@@ -254,15 +192,69 @@ namespace Infrastructure.Migrations
                     b.ToTable("EducationalDetails");
                 });
 
-            modelBuilder.Entity("ApplicantHealthRecords", b =>
+            modelBuilder.Entity("HealthRecords", b =>
                 {
-                    b.HasOne("Domain.Entities.Applicant", "Applicant")
-                        .WithOne("HealthRecords")
-                        .HasForeignKey("ApplicantHealthRecords", "ApplicantId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Navigation("Applicant");
+                    b.Property<bool?>("Accommodations")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("AccommodationsDetails")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool?>("Allergies")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("AllergiesDetails")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("ApplicantId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTimeOffset?>("Created")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTimeOffset?>("LastModified")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("LastModifiedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool?>("MedicalConditions")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("MedicalConditionsDetails")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool?>("Medications")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("MedicationsDetails")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool?>("Surgeries")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("SurgeriesDetails")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool?>("Vaccinated")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("VaccinatedDetails")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ApplicantId")
+                        .IsUnique();
+
+                    b.ToTable("HealthRecords");
                 });
 
             modelBuilder.Entity("EducationalDetails", b =>
@@ -270,6 +262,17 @@ namespace Infrastructure.Migrations
                     b.HasOne("Domain.Entities.Applicant", "Applicant")
                         .WithMany("EducationalDetails")
                         .HasForeignKey("ApplicantId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Applicant");
+                });
+
+            modelBuilder.Entity("HealthRecords", b =>
+                {
+                    b.HasOne("Domain.Entities.Applicant", "Applicant")
+                        .WithOne("HealthRecords")
+                        .HasForeignKey("HealthRecords", "ApplicantId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

@@ -41,5 +41,7 @@ namespace Domain.Entities
 		public string?  AnyComments { get; set; }
 
 		public ICollection<EducationalDetails>? EducationalDetails { get; set; }
+
+		public ApplicantHealthRecords? HealthRecords { get; set; }
 	}
 }
