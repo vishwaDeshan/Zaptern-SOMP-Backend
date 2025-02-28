@@ -1,9 +1,11 @@
 ﻿using Domain.Common;
+using System.ComponentModel.DataAnnotations;
 
 namespace Domain.Entities
 {
 	public class Applicant : AuditableEntity
 	{
+		[Key]
 		public Guid ApplicantId { get; set; }
 
 		public string FirstName { get; set; }

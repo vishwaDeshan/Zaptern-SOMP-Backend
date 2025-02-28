@@ -51,7 +51,7 @@ namespace Application.HealthRecords.Commands
 				ArgumentNullException.ThrowIfNull(_applicationDbContext, nameof(_applicationDbContext));
 
 				var existngHealthRecord = await _applicationDbContext.ApplicantHealthRecords
-				   .FirstOrDefaultAsync(e => e.ApplicantId == request.ApplicantId, cancellationToken);
+				   .FirstOrDefaultAsync(e => e.Applicant.ApplicantId == request.ApplicantId, cancellationToken);
 
 				var existingApplicant = await _applicationDbContext.Applicants
 								   .FirstOrDefaultAsync(e => e.ApplicantId == request.ApplicantId, cancellationToken);
@@ -74,8 +74,8 @@ namespace Application.HealthRecords.Commands
 				}
 
 				await _applicationDbContext.SaveChangesAsync(cancellationToken);
-				return _mapper.Map<HealthRecordsDto>(healthRecord);
-
+				var savedResult = _mapper.Map<HealthRecordsDto>(healthRecord);
+				return savedResult;
 			}
 			catch (Exception ex)
 			{

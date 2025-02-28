@@ -1,11 +1,12 @@
 ﻿using Domain.Common;
 using Domain.Entities;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 public class ApplicantHealthRecords : AuditableEntity
 {
-	public Guid ApplicantId { get; set; }
-
-	public required Applicant? Applicant { get; set; }
+	[ForeignKey("ApplicantId")]
+	public required Applicant Applicant { get; set; }
 
 	public bool? MedicalConditions { get; set; }
 

@@ -9,7 +9,9 @@ namespace Application.HealthRecords.Mappers
 		{
 			CreateMap<PostHealthRecordsRequestCommand, ApplicantHealthRecords>()
 				.ForMember(dest => dest.Applicant, opt => opt.Ignore());
-			CreateMap<ApplicantHealthRecords, HealthRecordsDto>();
+
+			CreateMap<ApplicantHealthRecords, HealthRecordsDto>()
+				.ForMember(dest => dest.ApplicantId, opt => opt.MapFrom(src => src.Applicant.ApplicantId));
 		}
 	}
 }
