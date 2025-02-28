@@ -55,4 +55,4 @@ jobs:
           app-name: 'Zaptern-SOMP'
           slot-name: 'Production'
           package: .
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_667FAB9F206F4F3A84F7601486943115 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_1C52BADE80BE4759B54D9A7558008F15 }}
