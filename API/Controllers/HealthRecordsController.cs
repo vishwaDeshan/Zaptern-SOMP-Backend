@@ -4,6 +4,7 @@ using Application.HealthRecords.Queries;
 using Application.HealthRecords;
 using Application.EducationDetails.Commands;
 using Application.EducationDetails;
+using Application.HealthRecords.Commands;
 
 namespace API.Controllers
 {
@@ -33,7 +34,7 @@ namespace API.Controllers
 
 
 		[HttpPost]
-		public async Task<ActionResult<HealthRecordsDto>> Add([FromBody] PostEducationalDetailsRequestCommand command)
+		public async Task<ActionResult<HealthRecordsDto>> Add([FromBody] PostHealthRecordsRequestCommand command)
 		{
 			try
 			{

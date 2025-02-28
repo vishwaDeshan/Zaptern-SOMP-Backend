@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Application.EducationDetails.Queries
 {
-	public class GetAllEducationalDetailsRequestQuery : IRequest<List<EducationalDetailsDto>>{ }
+	public class GetAllEducationalDetailsRequestQuery : IRequest<List<EducationalDetailsDto>> { }
 
 	public class GetAllEducationalRequestQueryHandler : IRequestHandler<GetAllEducationalDetailsRequestQuery, List<EducationalDetailsDto>>
 	{
@@ -30,7 +30,6 @@ namespace Application.EducationDetails.Queries
 					InstituteName = a.InstituteName,
 					StartDate = a.StartDate,
 					IsDoing = a.IsDoing
-
 				}).ToListAsync(cancellationToken);
 
 				return result;

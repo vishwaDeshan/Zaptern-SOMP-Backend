@@ -23,7 +23,7 @@ namespace Application.HealthRecords.Queries
 				ArgumentNullException.ThrowIfNull(request);
 				ArgumentNullException.ThrowIfNull(_applicationDbContext, nameof(_applicationDbContext));
 
-				var result = await _applicationDbContext.ApplicantHealthRecords.Where(HealthRecords => HealthRecords.Id == request.Id)
+				var result = await _applicationDbContext.ApplicantHealthRecords.Where(HealthRecords => HealthRecords.Applicant.ApplicantId == request.Id)
 					.Select(HealthRecords => new HealthRecordsDto
 					{
 						ApplicantId = HealthRecords.Applicant.ApplicantId,
