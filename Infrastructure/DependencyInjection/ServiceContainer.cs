@@ -1,10 +1,15 @@
 ﻿using Application;
 using Application.Applicants.Mappers;
+using Application.Common.Behaviors;
 using Application.Common.Interfaces;
 using Application.EducationDetails;
+using Application.HealthRecords.Commands;
+using Application.HealthRecords.Validators;
+using FluentValidation;
 using Infrastructure.Data;
 using Infrastructure.Repository;
 using Infrastructure.Services;
+using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -56,6 +61,13 @@ namespace Infrastructure.DependencyInjection
 			services.AddAutoMapper(Assembly.GetExecutingAssembly());
 			services.AddScoped<IApplicationDbContext>(provider => (IApplicationDbContext)provider.GetService<AppDbContext>());
 			services.AddHttpContextAccessor();
+
+
+			// add fluent validations to container
+			services.AddValidatorsFromAssemblyContaining<PostHealthRecordsRequestCommandValidator>();
+			services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
+
+			services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
 
 			return services;
 		}
