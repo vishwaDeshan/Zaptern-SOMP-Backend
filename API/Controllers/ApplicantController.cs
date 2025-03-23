@@ -52,6 +52,13 @@ namespace API.Controllers
 				return BadRequest(new { error = ex.Message });
 			}
 		}
+
+		[HttpGet("searchApplicant")]
+		public async Task<IActionResult> SearchApplicants([FromQuery] string searchTerm = "", [FromQuery] int pageNumber = 1, [FromQuery] int pageSize = 10)
+		{
+			var result = await Mediator.Send(new SearchApplicantsRequestQuery(searchTerm, pageNumber, pageSize));
+			return Ok(result);
+		}
 	}
 }
 
