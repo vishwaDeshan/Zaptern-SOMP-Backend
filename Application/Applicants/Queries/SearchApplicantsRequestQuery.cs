@@ -10,17 +10,12 @@ namespace Application.Applicants.Queries
 		public string SearchTerm { get; }
 		public int PageNumber { get; }
 		public int PageSize { get; }
-		public ApplicantSortField SortField { get; }
-		public SortOrder SortOrder { get; }
 
-		public SearchApplicantsRequestQuery(string searchTerm, int pageNumber, int pageSize,
-											 ApplicantSortField sortField, SortOrder sortOrder)
+		public SearchApplicantsRequestQuery(string searchTerm, int pageNumber, int pageSize)
 		{
 			SearchTerm = searchTerm;
 			PageNumber = pageNumber;
 			PageSize = pageSize;
-			SortField = sortField;
-			SortOrder = sortOrder;
 		}
 	}
 
@@ -46,27 +41,6 @@ namespace Application.Applicants.Queries
 								EF.Functions.Like(a.LastName, "%" + request.SearchTerm + "%") ||
 								EF.Functions.Like(a.Email, "%" + request.SearchTerm + "%") ||
 								EF.Functions.Like(a.City, "%" + request.SearchTerm + "%") );
-
-			// Sorting logic based on the requested sort field and order
-			query = request.SortField switch
-			{
-				ApplicantSortField.FirstName => request.SortOrder == SortOrder.Ascending
-												? query.OrderBy(a => a.FirstName)
-												: query.OrderByDescending(a => a.FirstName),
-				ApplicantSortField.LastName => request.SortOrder == SortOrder.Ascending
-												? query.OrderBy(a => a.LastName)
-												: query.OrderByDescending(a => a.LastName),
-				ApplicantSortField.Email => request.SortOrder == SortOrder.Ascending
-											 ? query.OrderBy(a => a.Email)
-											 : query.OrderByDescending(a => a.Email),
-				ApplicantSortField.City => request.SortOrder == SortOrder.Ascending
-											? query.OrderBy(a => a.City)
-											: query.OrderByDescending(a => a.City),
-				ApplicantSortField.DateOfBirth => request.SortOrder == SortOrder.Ascending
-												  ? query.OrderBy(a => a.DateOfBirth)
-												  : query.OrderByDescending(a => a.DateOfBirth),
-				_ => query.OrderBy(a => a.ApplicantId)
-			};
 
 
 			int totalItems = await query.CountAsync(cancellationToken);

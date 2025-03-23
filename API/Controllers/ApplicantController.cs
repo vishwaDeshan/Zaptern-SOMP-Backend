@@ -56,12 +56,10 @@ namespace API.Controllers
 		[HttpGet("searchApplicant")]
 		public async Task<IActionResult> SearchApplicants([FromQuery] string searchTerm = "",
 												  [FromQuery] int pageNumber = 1,
-												  [FromQuery] int pageSize = 10,
-												  [FromQuery] ApplicantSortField sortField = ApplicantSortField.FirstName,
-												  [FromQuery] SortOrder sortOrder = SortOrder.Ascending)
+												  [FromQuery] int pageSize = 10)
 		{
 			var result = await Mediator.Send(new SearchApplicantsRequestQuery(
-				searchTerm, pageNumber, pageSize, sortField, sortOrder));
+				searchTerm, pageNumber, pageSize));
 
 			return Ok(result);
 		}
