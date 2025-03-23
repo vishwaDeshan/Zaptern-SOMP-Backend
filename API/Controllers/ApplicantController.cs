@@ -54,9 +54,15 @@ namespace API.Controllers
 		}
 
 		[HttpGet("searchApplicant")]
-		public async Task<IActionResult> SearchApplicants([FromQuery] string searchTerm = "", [FromQuery] int pageNumber = 1, [FromQuery] int pageSize = 10)
+		public async Task<IActionResult> SearchApplicants([FromQuery] string searchTerm = "",
+												  [FromQuery] int pageNumber = 1,
+												  [FromQuery] int pageSize = 10,
+												  [FromQuery] ApplicantSortField sortField = ApplicantSortField.FirstName,
+												  [FromQuery] SortOrder sortOrder = SortOrder.Ascending)
 		{
-			var result = await Mediator.Send(new SearchApplicantsRequestQuery(searchTerm, pageNumber, pageSize));
+			var result = await Mediator.Send(new SearchApplicantsRequestQuery(
+				searchTerm, pageNumber, pageSize, sortField, sortOrder));
+
 			return Ok(result);
 		}
 	}
