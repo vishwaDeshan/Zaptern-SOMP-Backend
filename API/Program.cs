@@ -17,9 +17,12 @@ builder.Services.AddCors(options =>
 {
 	options.AddPolicy("AllowSpecificOrigins", policy =>
 	{
-		policy.WithOrigins("http://localhost:4200")
-			  .AllowAnyHeader()
-			  .AllowAnyMethod();
+		policy.WithOrigins(
+				"http://localhost:4200",
+				"https://skill-grid-web.azurewebsites.net"
+			)
+			.AllowAnyHeader()
+			.AllowAnyMethod();
 	});
 });
 
